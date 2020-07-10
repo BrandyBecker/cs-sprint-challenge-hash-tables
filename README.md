@@ -22,12 +22,41 @@ Commit your code regularly and meaningfully. This practice helps both you (in ca
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your answers beforehand.
 
-1. Hashing functions
-2. Collision resolution
-3. Performance of basic hash table operations
-4. Load factor
-5. Automatic resizing
-6. Various use cases for hash tables
+1. Hashing functions:
+- Hashing functions are any function that can be used to map data of arbitrary (random, unspecified value, chance) size to fixed-size values. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes. The values are used to index a hash table. 
+
+2. Collision resolution:
+- When two items hash to the same slot, there must be a systematic method for placing the second item in the hash table. This process is called collision resolution. 
+- Open Addressing: With this method a hash collision is resolved by probing (searching through alternate locations in the array (the probe sequence) until either the target record is found, or an unused array slot is found) which indicates that there is no such key in the table.
+    [
+    - Linear probing: in which the interval between probes is fixed — often set to 1
+    - Quadratic probing: in which the interval between probes increases quadratically 
+    - Double hashing: in which the interval between probes is fixed for each record but is computed by another hash function
+    ]
+- Chaining: 
+- Through chaining, insertion in a hash table always occurs in O(1) since linked lists allow insertion in constant time.
+- Theoretically, a chained hash table can grow infinitely as long as there is enough space.
+- A hash table which uses chaining will never need to be resized.
+
+3. Performance of basic hash table operations:
+Hash tables suffer from `O(n)` worst time complexity due to two reasons:
+    1. If too many elements were hashed into the same key: looking inside this key may take O(n) time.
+    2. Once a hash table has passed its load balance - it has to rehash [create a new bigger table, and re-insert each element to the table].
+However, it is said to be O(1) average and amortized case because:
+    1. It is very rare that many items will be hashed to the same key [if you chose a good hash function and you don't have too big load balance.
+    2. The rehash operation, which is `O(n)`, can at most happen after n/2 ops, which are all assumed O(1): Thus when you sum the average time per op, you get : (n*O(1) + O(n)) / n) = O(1)
+
+4. Load factor:
+- The Load factor is a measure that decides when to increase the HashMap capacity to maintain the get() and put() operation complexity of O(1). The default load factor of HashMap is 0.75f (75% of the map size).
+
+5. Automatic resizing:
+- When you resize the table, double the size and then round up to the first prime number larger than that. 
+
+6. Various use cases for hash tables:
+- Search for elements within a large data set
+- Find duplicate elements in a data set
+- Quickly store and retrieve elements from a large data set
+
 
 We expect you to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
@@ -35,25 +64,25 @@ We expect you to be able to answer questions in these areas. Your responses cont
 
 ### Task 1: Project Set-Up
 
-- [ ] Create a forked copy of this project
-- [ ] Add your team lead as a collaborator on Github
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!)
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
-- [ ] Push commits: git push origin `<firstName-lastName>`
+- [x] Create a forked copy of this project
+- [x] Add your team lead as a collaborator on Github
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!)
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
+- [x] Push commits: git push origin `<firstName-lastName>`
 
 ### Task 2: Project Requirements
 
 Your finished project must include all of the following requirements:
 
-- [ ] Solve any three of the five problems
+- [x] Solve any three of the five problems
 
 For each problem that you choose to solve, complete the following:
 
-- [ ] Navigate into each exercise's directory
-- [ ] Read the instructions for the exercise in the README
-- [ ] Implement your solution in the `.py` skeleton file
-- [ ] Make sure your code passes the tests running the test script with make tests
+- [x] Navigate into each exercise's directory
+- [x] Read the instructions for the exercise in the README
+- [x] Implement your solution in the `.py` skeleton file
+- [x] Make sure your code passes the tests running the test script with make tests
 
 *Note: For these exercises, we expect you to use Python's built-in `dict` as a hashtable. That said, if you wish, you can attempt to solve using your own hashtable implementation, as well. All solutions should utilize a `dict` or hashtable. You should not use Sets. (Though you can make a `dict` behave like a set if you wish.)*
 
